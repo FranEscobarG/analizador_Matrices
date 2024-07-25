@@ -1,0 +1,645 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> statements
+Rule 1     statements -> statement
+Rule 2     statements -> statements statement
+Rule 3     statement -> expression
+Rule 4     statement -> assignment
+Rule 5     assignment -> VARIABLE EQUALS expression
+Rule 6     expression -> expression PLUS expression
+Rule 7     expression -> expression MINUS expression
+Rule 8     expression -> expression TIMES expression
+Rule 9     expression -> NUMBER TIMES expression
+Rule 10    expression -> expression TRANSPOSE
+Rule 11    expression -> matrix
+Rule 12    expression -> VARIABLE
+Rule 13    matrix -> LBRACKET rows RBRACKET
+Rule 14    rows -> row
+Rule 15    rows -> rows COMMA row
+Rule 16    row -> LBRACKET elements RBRACKET
+Rule 17    row -> expression
+Rule 18    elements -> NUMBER
+Rule 19    elements -> elements COMMA NUMBER
+
+Terminals, with rules where they appear
+
+COMMA                : 15 19
+EQUALS               : 5
+LBRACKET             : 13 16
+MINUS                : 7
+NUMBER               : 9 18 19
+PLUS                 : 6
+RBRACKET             : 13 16
+TIMES                : 8 9
+TRANSPOSE            : 10
+VARIABLE             : 5 12
+error                : 
+
+Nonterminals, with rules where they appear
+
+assignment           : 4
+elements             : 16 19
+expression           : 3 5 6 6 7 7 8 8 9 10 17
+matrix               : 11
+row                  : 14 15
+rows                 : 13 15
+statement            : 1 2
+statements           : 2 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . statements
+    (1) statements -> . statement
+    (2) statements -> . statements statement
+    (3) statement -> . expression
+    (4) statement -> . assignment
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (5) assignment -> . VARIABLE EQUALS expression
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 7
+    LBRACKET        shift and go to state 8
+
+    statements                     shift and go to state 1
+    statement                      shift and go to state 2
+    expression                     shift and go to state 3
+    assignment                     shift and go to state 4
+    matrix                         shift and go to state 6
+
+state 1
+
+    (0) S' -> statements .
+    (2) statements -> statements . statement
+    (3) statement -> . expression
+    (4) statement -> . assignment
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (5) assignment -> . VARIABLE EQUALS expression
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 7
+    LBRACKET        shift and go to state 8
+
+    statement                      shift and go to state 9
+    expression                     shift and go to state 3
+    assignment                     shift and go to state 4
+    matrix                         shift and go to state 6
+
+state 2
+
+    (1) statements -> statement .
+
+    NUMBER          reduce using rule 1 (statements -> statement .)
+    VARIABLE        reduce using rule 1 (statements -> statement .)
+    LBRACKET        reduce using rule 1 (statements -> statement .)
+    $end            reduce using rule 1 (statements -> statement .)
+
+
+state 3
+
+    (3) statement -> expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+    NUMBER          reduce using rule 3 (statement -> expression .)
+    VARIABLE        reduce using rule 3 (statement -> expression .)
+    LBRACKET        reduce using rule 3 (statement -> expression .)
+    $end            reduce using rule 3 (statement -> expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+
+state 4
+
+    (4) statement -> assignment .
+
+    NUMBER          reduce using rule 4 (statement -> assignment .)
+    VARIABLE        reduce using rule 4 (statement -> assignment .)
+    LBRACKET        reduce using rule 4 (statement -> assignment .)
+    $end            reduce using rule 4 (statement -> assignment .)
+
+
+state 5
+
+    (9) expression -> NUMBER . TIMES expression
+
+    TIMES           shift and go to state 14
+
+
+state 6
+
+    (11) expression -> matrix .
+
+    PLUS            reduce using rule 11 (expression -> matrix .)
+    MINUS           reduce using rule 11 (expression -> matrix .)
+    TIMES           reduce using rule 11 (expression -> matrix .)
+    TRANSPOSE       reduce using rule 11 (expression -> matrix .)
+    NUMBER          reduce using rule 11 (expression -> matrix .)
+    VARIABLE        reduce using rule 11 (expression -> matrix .)
+    LBRACKET        reduce using rule 11 (expression -> matrix .)
+    $end            reduce using rule 11 (expression -> matrix .)
+    RBRACKET        reduce using rule 11 (expression -> matrix .)
+    COMMA           reduce using rule 11 (expression -> matrix .)
+
+
+state 7
+
+    (12) expression -> VARIABLE .
+    (5) assignment -> VARIABLE . EQUALS expression
+
+    PLUS            reduce using rule 12 (expression -> VARIABLE .)
+    MINUS           reduce using rule 12 (expression -> VARIABLE .)
+    TIMES           reduce using rule 12 (expression -> VARIABLE .)
+    TRANSPOSE       reduce using rule 12 (expression -> VARIABLE .)
+    NUMBER          reduce using rule 12 (expression -> VARIABLE .)
+    VARIABLE        reduce using rule 12 (expression -> VARIABLE .)
+    LBRACKET        reduce using rule 12 (expression -> VARIABLE .)
+    $end            reduce using rule 12 (expression -> VARIABLE .)
+    EQUALS          shift and go to state 15
+
+
+state 8
+
+    (13) matrix -> LBRACKET . rows RBRACKET
+    (14) rows -> . row
+    (15) rows -> . rows COMMA row
+    (16) row -> . LBRACKET elements RBRACKET
+    (17) row -> . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    LBRACKET        shift and go to state 16
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+
+    rows                           shift and go to state 17
+    row                            shift and go to state 18
+    expression                     shift and go to state 19
+    matrix                         shift and go to state 6
+
+state 9
+
+    (2) statements -> statements statement .
+
+    NUMBER          reduce using rule 2 (statements -> statements statement .)
+    VARIABLE        reduce using rule 2 (statements -> statements statement .)
+    LBRACKET        reduce using rule 2 (statements -> statements statement .)
+    $end            reduce using rule 2 (statements -> statements statement .)
+
+
+state 10
+
+    (6) expression -> expression PLUS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+    LBRACKET        shift and go to state 8
+
+    expression                     shift and go to state 21
+    matrix                         shift and go to state 6
+
+state 11
+
+    (7) expression -> expression MINUS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+    LBRACKET        shift and go to state 8
+
+    expression                     shift and go to state 22
+    matrix                         shift and go to state 6
+
+state 12
+
+    (8) expression -> expression TIMES . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+    LBRACKET        shift and go to state 8
+
+    expression                     shift and go to state 23
+    matrix                         shift and go to state 6
+
+state 13
+
+    (10) expression -> expression TRANSPOSE .
+
+    PLUS            reduce using rule 10 (expression -> expression TRANSPOSE .)
+    MINUS           reduce using rule 10 (expression -> expression TRANSPOSE .)
+    TIMES           reduce using rule 10 (expression -> expression TRANSPOSE .)
+    TRANSPOSE       reduce using rule 10 (expression -> expression TRANSPOSE .)
+    NUMBER          reduce using rule 10 (expression -> expression TRANSPOSE .)
+    VARIABLE        reduce using rule 10 (expression -> expression TRANSPOSE .)
+    LBRACKET        reduce using rule 10 (expression -> expression TRANSPOSE .)
+    $end            reduce using rule 10 (expression -> expression TRANSPOSE .)
+    RBRACKET        reduce using rule 10 (expression -> expression TRANSPOSE .)
+    COMMA           reduce using rule 10 (expression -> expression TRANSPOSE .)
+
+
+state 14
+
+    (9) expression -> NUMBER TIMES . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+    LBRACKET        shift and go to state 8
+
+    expression                     shift and go to state 24
+    matrix                         shift and go to state 6
+
+state 15
+
+    (5) assignment -> VARIABLE EQUALS . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+    LBRACKET        shift and go to state 8
+
+    expression                     shift and go to state 25
+    matrix                         shift and go to state 6
+
+state 16
+
+    (16) row -> LBRACKET . elements RBRACKET
+    (13) matrix -> LBRACKET . rows RBRACKET
+    (18) elements -> . NUMBER
+    (19) elements -> . elements COMMA NUMBER
+    (14) rows -> . row
+    (15) rows -> . rows COMMA row
+    (16) row -> . LBRACKET elements RBRACKET
+    (17) row -> . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    NUMBER          shift and go to state 27
+    LBRACKET        shift and go to state 16
+    VARIABLE        shift and go to state 20
+
+    elements                       shift and go to state 26
+    rows                           shift and go to state 17
+    row                            shift and go to state 18
+    expression                     shift and go to state 19
+    matrix                         shift and go to state 6
+
+state 17
+
+    (13) matrix -> LBRACKET rows . RBRACKET
+    (15) rows -> rows . COMMA row
+
+    RBRACKET        shift and go to state 28
+    COMMA           shift and go to state 29
+
+
+state 18
+
+    (14) rows -> row .
+
+    RBRACKET        reduce using rule 14 (rows -> row .)
+    COMMA           reduce using rule 14 (rows -> row .)
+
+
+state 19
+
+    (17) row -> expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+    RBRACKET        reduce using rule 17 (row -> expression .)
+    COMMA           reduce using rule 17 (row -> expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+
+state 20
+
+    (12) expression -> VARIABLE .
+
+    PLUS            reduce using rule 12 (expression -> VARIABLE .)
+    MINUS           reduce using rule 12 (expression -> VARIABLE .)
+    TIMES           reduce using rule 12 (expression -> VARIABLE .)
+    TRANSPOSE       reduce using rule 12 (expression -> VARIABLE .)
+    RBRACKET        reduce using rule 12 (expression -> VARIABLE .)
+    COMMA           reduce using rule 12 (expression -> VARIABLE .)
+    NUMBER          reduce using rule 12 (expression -> VARIABLE .)
+    VARIABLE        reduce using rule 12 (expression -> VARIABLE .)
+    LBRACKET        reduce using rule 12 (expression -> VARIABLE .)
+    $end            reduce using rule 12 (expression -> VARIABLE .)
+
+
+state 21
+
+    (6) expression -> expression PLUS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for TRANSPOSE resolved as shift
+    NUMBER          reduce using rule 6 (expression -> expression PLUS expression .)
+    VARIABLE        reduce using rule 6 (expression -> expression PLUS expression .)
+    LBRACKET        reduce using rule 6 (expression -> expression PLUS expression .)
+    $end            reduce using rule 6 (expression -> expression PLUS expression .)
+    RBRACKET        reduce using rule 6 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 6 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+  ! PLUS            [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+  ! TRANSPOSE       [ reduce using rule 6 (expression -> expression PLUS expression .) ]
+
+
+state 22
+
+    (7) expression -> expression MINUS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for TRANSPOSE resolved as shift
+    NUMBER          reduce using rule 7 (expression -> expression MINUS expression .)
+    VARIABLE        reduce using rule 7 (expression -> expression MINUS expression .)
+    LBRACKET        reduce using rule 7 (expression -> expression MINUS expression .)
+    $end            reduce using rule 7 (expression -> expression MINUS expression .)
+    RBRACKET        reduce using rule 7 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 7 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+  ! PLUS            [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+  ! TRANSPOSE       [ reduce using rule 7 (expression -> expression MINUS expression .) ]
+
+
+state 23
+
+    (8) expression -> expression TIMES expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for TRANSPOSE resolved as shift
+    NUMBER          reduce using rule 8 (expression -> expression TIMES expression .)
+    VARIABLE        reduce using rule 8 (expression -> expression TIMES expression .)
+    LBRACKET        reduce using rule 8 (expression -> expression TIMES expression .)
+    $end            reduce using rule 8 (expression -> expression TIMES expression .)
+    RBRACKET        reduce using rule 8 (expression -> expression TIMES expression .)
+    COMMA           reduce using rule 8 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+  ! PLUS            [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+  ! TRANSPOSE       [ reduce using rule 8 (expression -> expression TIMES expression .) ]
+
+
+state 24
+
+    (9) expression -> NUMBER TIMES expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for TRANSPOSE resolved as shift
+    NUMBER          reduce using rule 9 (expression -> NUMBER TIMES expression .)
+    VARIABLE        reduce using rule 9 (expression -> NUMBER TIMES expression .)
+    LBRACKET        reduce using rule 9 (expression -> NUMBER TIMES expression .)
+    $end            reduce using rule 9 (expression -> NUMBER TIMES expression .)
+    RBRACKET        reduce using rule 9 (expression -> NUMBER TIMES expression .)
+    COMMA           reduce using rule 9 (expression -> NUMBER TIMES expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+  ! PLUS            [ reduce using rule 9 (expression -> NUMBER TIMES expression .) ]
+  ! MINUS           [ reduce using rule 9 (expression -> NUMBER TIMES expression .) ]
+  ! TIMES           [ reduce using rule 9 (expression -> NUMBER TIMES expression .) ]
+  ! TRANSPOSE       [ reduce using rule 9 (expression -> NUMBER TIMES expression .) ]
+
+
+state 25
+
+    (5) assignment -> VARIABLE EQUALS expression .
+    (6) expression -> expression . PLUS expression
+    (7) expression -> expression . MINUS expression
+    (8) expression -> expression . TIMES expression
+    (10) expression -> expression . TRANSPOSE
+
+    NUMBER          reduce using rule 5 (assignment -> VARIABLE EQUALS expression .)
+    VARIABLE        reduce using rule 5 (assignment -> VARIABLE EQUALS expression .)
+    LBRACKET        reduce using rule 5 (assignment -> VARIABLE EQUALS expression .)
+    $end            reduce using rule 5 (assignment -> VARIABLE EQUALS expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    TRANSPOSE       shift and go to state 13
+
+
+state 26
+
+    (16) row -> LBRACKET elements . RBRACKET
+    (19) elements -> elements . COMMA NUMBER
+
+    RBRACKET        shift and go to state 30
+    COMMA           shift and go to state 31
+
+
+state 27
+
+    (18) elements -> NUMBER .
+    (9) expression -> NUMBER . TIMES expression
+
+    RBRACKET        reduce using rule 18 (elements -> NUMBER .)
+    COMMA           reduce using rule 18 (elements -> NUMBER .)
+    TIMES           shift and go to state 14
+
+
+state 28
+
+    (13) matrix -> LBRACKET rows RBRACKET .
+
+    PLUS            reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    MINUS           reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    TIMES           reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    TRANSPOSE       reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    NUMBER          reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    VARIABLE        reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    LBRACKET        reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    $end            reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    RBRACKET        reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+    COMMA           reduce using rule 13 (matrix -> LBRACKET rows RBRACKET .)
+
+
+state 29
+
+    (15) rows -> rows COMMA . row
+    (16) row -> . LBRACKET elements RBRACKET
+    (17) row -> . expression
+    (6) expression -> . expression PLUS expression
+    (7) expression -> . expression MINUS expression
+    (8) expression -> . expression TIMES expression
+    (9) expression -> . NUMBER TIMES expression
+    (10) expression -> . expression TRANSPOSE
+    (11) expression -> . matrix
+    (12) expression -> . VARIABLE
+    (13) matrix -> . LBRACKET rows RBRACKET
+
+    LBRACKET        shift and go to state 16
+    NUMBER          shift and go to state 5
+    VARIABLE        shift and go to state 20
+
+    row                            shift and go to state 32
+    expression                     shift and go to state 19
+    matrix                         shift and go to state 6
+
+state 30
+
+    (16) row -> LBRACKET elements RBRACKET .
+
+    RBRACKET        reduce using rule 16 (row -> LBRACKET elements RBRACKET .)
+    COMMA           reduce using rule 16 (row -> LBRACKET elements RBRACKET .)
+
+
+state 31
+
+    (19) elements -> elements COMMA . NUMBER
+
+    NUMBER          shift and go to state 33
+
+
+state 32
+
+    (15) rows -> rows COMMA row .
+
+    RBRACKET        reduce using rule 15 (rows -> rows COMMA row .)
+    COMMA           reduce using rule 15 (rows -> rows COMMA row .)
+
+
+state 33
+
+    (19) elements -> elements COMMA NUMBER .
+
+    RBRACKET        reduce using rule 19 (elements -> elements COMMA NUMBER .)
+    COMMA           reduce using rule 19 (elements -> elements COMMA NUMBER .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 21 resolved as shift
+WARNING: shift/reduce conflict for TRANSPOSE in state 21 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 22 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 22 resolved as shift
+WARNING: shift/reduce conflict for TRANSPOSE in state 22 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 23 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 23 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 23 resolved as shift
+WARNING: shift/reduce conflict for TRANSPOSE in state 23 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
+WARNING: shift/reduce conflict for TRANSPOSE in state 24 resolved as shift
